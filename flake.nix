@@ -10,6 +10,11 @@
   };
 
   outputs = { self, nixpkgs, ubootSrc }: rec {
+    overlays.default = self: super: {
+      # glib is broken
+      util-linux = super.util-linux.override { translateManpages = false; };
+    };
+
     nixosConfigurations.rattlesnake = nixpkgs.lib.nixosSystem {
       system = "riscv64-linux";
       modules = [
@@ -20,6 +25,8 @@
           ];
 
           nixpkgs = {
+            overlays = [ self.overlays.default ];
+
             localSystem.config = "x86_64-linux";
             crossSystem.config = "riscv64-linux";
           };
@@ -30,7 +37,8 @@
             spl.image = "${self.packages.x86_64-linux.firmware}/u-boot-spl.bin.normal.out";
             uboot.image = "${self.packages.x86_64-linux.firmware}/visionfive2_fw_payload.img";
             firmware.populateCmd = ''
-              ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./firmware
+              ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./firmware/boot
+              cp ${./uEnv.txt} ./firmware/boot/uEnv.txt
             '';
           };
 
@@ -42,7 +50,32 @@
               "console=ttyS0,115200"
               "earlycon=sbi"
               "boot.shell_on_fail"
-              "init=/bin/bash"
+            ];
+
+            blacklistedKernelModules = [
+              # Last thing to log before crash...
+              "axp15060-regulator"
+              # Also sus
+              "at24"
+              # Also also sus
+              "jh7110-vin"
+              # Maybe??
+              "starfive-jh7110-regulator"
+
+              # This one stopped the crashing
+              "starfivecamss"
+            ];
+
+            initrd.includeDefaultModules = false;
+            initrd.availableKernelModules = [
+              "dw_mmc-pltfm"
+              "dw_mmc-starfive"
+              "spi-dw-mmio"
+              "mmc_block"
+              "nvme"
+              "sdhci" #?
+              "sdhci-pci" #?
+              "sdhci-of-dwcmshc"
             ];
 
             loader = {
@@ -54,7 +87,7 @@
           systemd.services."serial-getty@hvc0".enable = false;
 
           services = {
-            getty.autologinUser = "root";
+            # getty.autologinUser = "root";
             # openssh = {
             #   enable = true;
             #   permitRootLogin = "yes";
@@ -131,6 +164,8 @@
       pkgs = import nixpkgs { system = "x86_64-linux"; };
    in pkgs.stdenv.mkDerivation {
       name = "VisionFive 2 Test";
+
+      nativeBuildInputs = [ pkgs.picocom ];
     };
   };
 }

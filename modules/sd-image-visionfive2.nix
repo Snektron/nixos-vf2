@@ -87,6 +87,7 @@ in {
       description = "u-boot partition options";
       type = mkSubmodule ((partitionOptions {
         name = "uboot";
+        defaultOffset = 4;
         defaultSize = 4;
         defaultTypeUUID = "5B193300-FC78-40CD-8002-E86C45580B47";
       }) // imagePartitionOptions);
@@ -188,7 +189,7 @@ in {
             partition ${config.sdImage.spl.name} {
               image = ${config.sdImage.spl.image}
               partition-type-uuid = ${config.sdImage.spl.partitionTypeUUID}
-              ${optionalString (config.sdImage.spl.offset != null) "offset = ${toString config.sdImage.spl.offset}M"}
+              ${assert config.sdImage.spl.offset != null; "offset = ${toString config.sdImage.spl.offset}M"}
               ${optionalString (config.sdImage.spl.size != null) "size = ${toString config.sdImage.spl.size}M"}
             }
 
