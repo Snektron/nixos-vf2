@@ -25,16 +25,16 @@
     "ubootSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1673450158,
-        "narHash": "sha256-BF5CFcldqZqH6p16ycStih6udenyg2pDRp0EvcZHzVk=",
-        "owner": "starfive-tech",
-        "repo": "u-boot",
-        "rev": "f1d959f0b02e16842181a4c1723ba3ea30d2e04a",
+        "lastModified": 1677285773,
+        "narHash": "sha256-+YjBWuxeGRNyFI2VX6iSxlJN9IjDvoeQEpUlLvF2YRg=",
+        "owner": "Snektron",
+        "repo": "u-boot-vf2",
+        "rev": "148d988d73f0be02a629219c563ef70415b42430",
         "type": "github"
       },
       "original": {
-        "owner": "starfive-tech",
-        "repo": "u-boot",
+        "owner": "Snektron",
+        "repo": "u-boot-vf2",
         "type": "github"
       }
     }

@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     ubootSrc = {
       flake = false;
-      url = "github:starfive-tech/u-boot";
+      url = "github:Snektron/u-boot-vf2";
     };
   };
 
@@ -38,7 +38,6 @@
             uboot.image = "${self.packages.x86_64-linux.firmware}/visionfive2_fw_payload.img";
             firmware.populateCmd = ''
               ${config.boot.loader.generic-extlinux-compatible.populateCmd} -c ${config.system.build.toplevel} -d ./firmware/boot
-              cp ${./uEnv.txt} ./firmware/boot/uEnv.txt
             '';
           };
 

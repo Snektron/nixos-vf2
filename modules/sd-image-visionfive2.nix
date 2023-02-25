@@ -202,6 +202,7 @@ in {
 
             partition ${config.sdImage.firmware.name} {
               image = ./firmware-fs.img
+              bootable = true
               partition-type-uuid = ${config.sdImage.firmware.partitionTypeUUID}
               ${optionalString (config.sdImage.firmware.offset != null) "offset = ${toString config.sdImage.firmware.offset}M"}
               ${optionalString (config.sdImage.firmware.size != null) "size = ${toString config.sdImage.firmware.size}M"}
