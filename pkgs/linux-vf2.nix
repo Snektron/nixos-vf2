@@ -9,8 +9,8 @@ buildLinux (args // {
   src = fetchFromGitHub {
     owner = "starfive-tech";
     repo = "linux";
-    rev = "JH7110_VisionFive2_devel";
-    sha256 = "sha256-o1k1UDUXUsRb4200zZ5ozVL15g7wsheet8O5UhX2HWY=";
+    rev = "4639179fefcf0ba72fb3dd2475bddf4148aeeed4";
+    sha256 = "sha256-ZmmBBse2Ddw9XO3PGkQBuoqSTw7LJQyRNyQneJ4RUZY=";
   };
 
   kernelPatches = [
@@ -21,7 +21,6 @@ buildLinux (args // {
        includes = ["security/keys/dh.c"];
      };
     }
-    { patch = ../patches/visionfive-2-duplicate-init-module.patch; }
     { patch = ../patches/visionfive-2-pl330-name-collision.patch; }
     { patch = ../patches/visionfive-2-gpu.patch; }
   ];
