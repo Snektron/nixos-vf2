@@ -69,6 +69,7 @@
             initrd.availableKernelModules = [
               "dw_mmc-pltfm"
               "dw_mmc-starfive"
+              "dwmac-starfive-plat"
               "spi-dw-mmio"
               "mmc_block"
               "nvme"
@@ -86,7 +87,7 @@
           systemd.services."serial-getty@hvc0".enable = false;
 
           services = {
-            # getty.autologinUser = "root";
+            getty.autologinUser = "root";
             # openssh = {
             #   enable = true;
             #   permitRootLogin = "yes";
@@ -100,7 +101,7 @@
 
           system.stateVersion = "22.11";
 
-          environment.systemPackages = with pkgs; [ neofetch ];
+          environment.systemPackages = with pkgs; [ neofetch lshw pciutils ];
         })
       ];
     };
