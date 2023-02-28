@@ -6,8 +6,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "starfive-tech";
     repo = "Tools";
-    rev = "1656fda1fbf79b7d15a654e34be6e0058407b017";
-    sha256 = "sha256-U3wZLE3yBzTnGn6aO3M1YzNAjQGbxU1YQT5hT4gqwiY=";
+    rev = "8c5acc4e5eb7e4ad012463b05a5e3dbbfed1c38d";
+    sha256 = "sha256-Kf9+68lsctVcG765Tv9R6g1Px8RCHUKzbIg23+o9E3g=";
   };
 
   installPhase = ''
