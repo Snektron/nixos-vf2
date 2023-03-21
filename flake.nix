@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+
     ubootSrc = {
       flake = false;
       url = "github:Snektron/u-boot-vf2";
@@ -14,6 +15,10 @@
       # glib is broken
       util-linux = super.util-linux.override { translateManpages = false; };
       neofetch = super.neofetch.override { x11Support = false; };
+    };
+
+    nixosModules = {
+      sdImage = import ./modules/sd-image-visionfive2.nix;
     };
 
     nixosConfigurations.sd = nixpkgs.lib.nixosSystem {
@@ -110,7 +115,7 @@
       };
     in rec {
       sd = nixosConfigurations.sd.config.system.build.sdImage;
-      kernel = pkgs-cross.linuxPackagesFor (pkgs-cross.callPackage ./pkgs/linux-vf2.nix { kernelPatches = [ ]; });
+      kernel = pkgs-cross.callPackage ./pkgs/linux-vf2.nix { kernelPatches = [ ]; };
       splTool = pkgs.callPackage ./pkgs/spl_tool.nix { };
 
       uboot = pkgs-cross.buildUBoot {
