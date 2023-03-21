@@ -13,6 +13,7 @@
     overlays.default = self: super: {
       # glib is broken
       util-linux = super.util-linux.override { translateManpages = false; };
+      neofetch = super.neofetch.override { x11Support = false; };
     };
 
     nixosConfigurations.rattlesnake = nixpkgs.lib.nixosSystem {
