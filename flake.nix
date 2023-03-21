@@ -31,7 +31,7 @@
             crossSystem.config = "riscv64-linux";
           };
 
-          hardware.deviceTree.name = "starfive/jh7110-visionfive-v2.dtb";
+          hardware.deviceTree.name = "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb";
 
           sdImage = {
             spl.image = "${self.packages.x86_64-linux.firmware}/u-boot-spl.bin.normal.out";
@@ -51,30 +51,16 @@
               "boot.shell_on_fail"
             ];
 
-            blacklistedKernelModules = [
-              # Last thing to log before crash...
-              "axp15060-regulator"
-              # Also sus
-              "at24"
-              # Also also sus
-              "jh7110-vin"
-              # Maybe??
-              "starfive-jh7110-regulator"
-
-              # This one stopped the crashing
-              "starfivecamss"
-            ];
-
             initrd.includeDefaultModules = false;
             initrd.availableKernelModules = [
               "dw_mmc-pltfm"
               "dw_mmc-starfive"
-              "dwmac-starfive-plat"
+              "dwmac-starfive"
               "spi-dw-mmio"
               "mmc_block"
               "nvme"
-              "sdhci" #?
-              "sdhci-pci" #?
+              "sdhci"
+              "sdhci-pci"
               "sdhci-of-dwcmshc"
             ];
 
