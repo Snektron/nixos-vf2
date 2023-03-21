@@ -16,7 +16,7 @@
       neofetch = super.neofetch.override { x11Support = false; };
     };
 
-    nixosConfigurations.rattlesnake = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.sd = nixpkgs.lib.nixosSystem {
       system = "riscv64-linux";
       modules = [
         "${nixpkgs}/nixos/modules/profiles/minimal.nix"
@@ -109,7 +109,7 @@
         system = "x86_64-linux";
       };
     in rec {
-      rattlesnake-sd = nixosConfigurations.rattlesnake.config.system.build.sdImage;
+      sd = nixosConfigurations.sd.config.system.build.sdImage;
       kernel = pkgs-cross.linuxPackagesFor (pkgs-cross.callPackage ./pkgs/linux-vf2.nix { kernelPatches = [ ]; });
       splTool = pkgs.callPackage ./pkgs/spl_tool.nix { };
 
