@@ -73,12 +73,19 @@
 
           systemd.services."serial-getty@hvc0".enable = false;
 
+          # If getty is not explicitly enabled, it will not start automatically.
+          # https://github.com/NixOS/nixpkgs/issues/84105
+          systemd.services."serial-getty@ttyS0" = {
+            enable = true;
+            wantedBy = [ "getty.target" ];
+            serviceConfig.Restart = "always";
+          };
+
           services = {
-            getty.autologinUser = "root";
-            # openssh = {
-            #   enable = true;
-            #   permitRootLogin = "yes";
-            # };
+            openssh = {
+              enable = true;
+              permitRootLogin = "yes";
+            };
           };
 
           users = {
