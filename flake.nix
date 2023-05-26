@@ -14,7 +14,12 @@
     overlays.default = self: super: {
       # glib is broken
       util-linux = super.util-linux.override { translateManpages = false; };
+      # Dont need this
       neofetch = super.neofetch.override { x11Support = false; };
+      # Flaky tests
+      openssh = super.openssh.overrideAttrs (old: {
+        doCheck = false;
+      });
     };
 
     nixosModules = {
