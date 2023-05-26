@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1677075010,
-        "narHash": "sha256-X+UmR1AkdR//lPVcShmLy8p1n857IGf7y+cyCArp8bU=",
+        "lastModified": 1684936879,
+        "narHash": "sha256-BOSq/QiX7MDs8tUnAt4+nYTJctgYkzVSNL95qlfMYeM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c95bf18beba4290af25c60cbaaceea1110d0f727",
+        "rev": "99fe1b870522d6ee3e692c2b6e663d6868a3fde4",
         "type": "github"
       },
       "original": {
@@ -25,11 +25,11 @@
     "ubootSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1679426509,
-        "narHash": "sha256-2k0KikdRaOs+0FEBNWR1EuPkm8c8OmC1WiZNhI2RL7M=",
+        "lastModified": 1679525677,
+        "narHash": "sha256-FfcrFi60cR/Ja5W0Zjw4wgkqdwmhEC7xXoKeSDniCME=",
         "owner": "Snektron",
         "repo": "u-boot-vf2",
-        "rev": "8d35d1590da318531f1f10e6de718ee0d0faf531",
+        "rev": "45f43da21df59e9a8de0d4314be16c2a47aad70a",
         "type": "github"
       },
       "original": {
