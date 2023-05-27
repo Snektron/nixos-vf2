@@ -25,11 +25,11 @@
     "ubootSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1679525677,
-        "narHash": "sha256-FfcrFi60cR/Ja5W0Zjw4wgkqdwmhEC7xXoKeSDniCME=",
+        "lastModified": 1685126330,
+        "narHash": "sha256-BjTvgZId3Cp1tuRh11DyfJTwymCEV/DDBN2QBj1QXVg=",
         "owner": "Snektron",
         "repo": "u-boot-vf2",
-        "rev": "45f43da21df59e9a8de0d4314be16c2a47aad70a",
+        "rev": "fb440e664c56415d55a1850995f9dd0bafaa6680",
         "type": "github"
       },
       "original": {
