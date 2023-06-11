@@ -2,7 +2,7 @@
   description = "VisionFive 2 test flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
 
     ubootSrc = {
       flake = false;
@@ -91,11 +91,9 @@
             serviceConfig.Restart = "always";
           };
 
-          services = {
-            openssh = {
-              enable = true;
-              permitRootLogin = "yes";
-            };
+          services.openssh = {
+            enable = true;
+            settings.PermitRootLogin = "yes";
           };
 
           users = {
@@ -103,7 +101,7 @@
             users.root.password = "secret";
           };
 
-          system.stateVersion = "22.11";
+          system.stateVersion = "23.05";
 
           environment.systemPackages = with pkgs; [ neofetch lshw pciutils ];
         })
