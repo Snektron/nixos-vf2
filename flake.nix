@@ -6,7 +6,7 @@
 
     ubootSrc = {
       flake = false;
-      url = "github:Snektron/u-boot-vf2";
+      url = "github:u-boot/u-boot";
     };
   };
 
@@ -96,6 +96,8 @@
             settings.PermitRootLogin = "yes";
           };
 
+          networking.firewall.allowedTCPPorts = [ 22 ];
+
           users = {
             mutableUsers = false;
             users.root.password = "secret";
@@ -103,7 +105,13 @@
 
           system.stateVersion = "23.05";
 
-          environment.systemPackages = with pkgs; [ neofetch lshw pciutils ];
+          environment.systemPackages = with pkgs; [
+            neofetch
+            lshw
+            pciutils
+            parted
+            git
+          ];
         })
       ];
     };
@@ -122,8 +130,8 @@
       splTool = pkgs.callPackage ./pkgs/spl_tool.nix { };
 
       uboot = pkgs-cross.buildUBoot {
-        version = "2021.10";
-        src = ubootSrc;
+        # version = "2023.8";
+        # src = ubootSrc;
         defconfig = "starfive_visionfive2_defconfig";
         filesToInstall = [
           "u-boot.bin"

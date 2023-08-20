@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1686237827,
-        "narHash": "sha256-fAZB+Zkcmc+qlauiFnIH9+2qgwM0NO/ru5pWEw3tDow=",
+        "lastModified": 1692339729,
+        "narHash": "sha256-TUK76/Pqm9qIDjEGd27Lz9EiBIvn5F70JWDmEQ4Y5DQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "81ed90058a851eb73be835c770e062c6938c8a9e",
+        "rev": "ae521bd4e460b076a455dca8b13f4151489a725c",
         "type": "github"
       },
       "original": {
@@ -25,16 +25,16 @@
     "ubootSrc": {
       "flake": false,
       "locked": {
-        "lastModified": 1685126330,
-        "narHash": "sha256-BjTvgZId3Cp1tuRh11DyfJTwymCEV/DDBN2QBj1QXVg=",
-        "owner": "Snektron",
-        "repo": "u-boot-vf2",
-        "rev": "fb440e664c56415d55a1850995f9dd0bafaa6680",
+        "lastModified": 1692368703,
+        "narHash": "sha256-Z1C41ni47FVUFXQbZIvjeFc9PzMJUDN/iYnpwXBifsA=",
+        "owner": "u-boot",
+        "repo": "u-boot",
+        "rev": "e34efcf51df86eb2b07d9deb171596940586c666",
         "type": "github"
       },
       "original": {
-        "owner": "Snektron",
-        "repo": "u-boot-vf2",
+        "owner": "u-boot",
+        "repo": "u-boot",
         "type": "github"
       }
     }

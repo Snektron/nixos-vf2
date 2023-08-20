@@ -1,6 +1,6 @@
 { lib , fetchFromGitHub , buildLinux, fetchpatch, ... } @ args:
 let
-  modDirVersion = "6.4.0-rc3";
+  modDirVersion = "6.5.0-rc1";
 in
 buildLinux (args // {
   inherit modDirVersion;
@@ -9,35 +9,18 @@ buildLinux (args // {
   src = fetchFromGitHub {
     owner = "starfive-tech";
     repo = "linux";
-    rev = "d2637628afd75af2064e74fd1b81fb4a97a76a92";
-    hash = "sha256-39yhOsHP3RP75Mge3Zhktj6+oIwTHQZlOb82jjM2Hbg=";
+    rev = "67e8df01b875afd312a7d2ab77f56a62f39dd6d9";
+    hash = "sha256-H+INnZTrfeCLmxPYbQEu3658/e5/Wz/Y5Ann2+lU6WQ=";
   };
 
   structuredExtraConfig = with lib.kernel; {
+    # According to starfive-tech/linux readme
     ARCH_STARFIVE = yes;
     SOC_STARFIVE = yes;
-
-    SERIAL_8250 = yes;
-
-    NO_HZ_IDLE = yes;
-    CPU_FREQ = yes;
-    CPUFREQ_DT = yes;
-    CPUFREQ_DT_PLATDEV = yes;
-    HIBERNATION = yes;
-
-    GPIO_SYSFS = yes;
-    POWER_RESET_GPIO_RESET = yes;
-
-    PROC_KCORE = yes;
-
-    PWM = yes;
-    PWM_STARFIVE_PTC = yes;
-
-    SIFIVE_CCACHE = yes;
-
-    V4L_PLATFORM_DRIVERS = yes; # TODO: Make module
-
-    PL330_DMA = no;
+    SERIAL_8250_DW = yes;
+    PINCTL_STARFIVE_JH7110_SYS = yes;
+    MMC_DW_STARFIVE = yes;
+    DWMAC_STARFIVE = yes;
   };
 
   extraMeta = {
