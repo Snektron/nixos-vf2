@@ -87,6 +87,7 @@
 
     nixosModules = {
       sdImage = import ./modules/sd-image-visionfive2.nix;
+      systemd-boot = import ./modules/systemd-boot.nix;
     };
 
     nixosConfigurations.sd = nixpkgs.lib.nixosSystem {
