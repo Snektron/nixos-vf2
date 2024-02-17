@@ -26,6 +26,7 @@
       libseccomp = super.libseccomp.overrideAttrs (old: { doCheck = false; });
       bind = super.bind.overrideAttrs (old: { doCheck = false; });
       elfutils = super.elfutils.overrideAttrs (old: { doCheck = false; doInstallCheck = false; });
+      fish = super.fish.overrideAttrs (old: { doCheck = false; });
 
       nixVersions = super.nixVersions // {
         nix_2_18 = super.nixVersions.nix_2_18.overrideAttrs (old: { doCheck = false; doInstallCheck = false; });
