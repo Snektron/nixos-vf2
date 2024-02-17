@@ -15,7 +15,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, uboot-src, starfive-tools-src }: rec {
+  outputs = { self, nixpkgs, uboot-src, starfive-tools-src } @ inputs: rec {
     overlays.default = self: super: {
       # Flaky tests
       coreutils = super.coreutils.overrideAttrs (old: { doCheck = false; });
@@ -42,9 +42,12 @@
               "test_connect_to_selfsigned_fails"
             ];
           });
+          mypy = pysuper.mypy.overrideAttrs (old: { dontUsePytestCheck = true; });
         };
       };
       pythonPackages = self.python3.pkgs;
+
+      mypy = with self.pythonPackages; toPythonApplication mypy;
 
       # https://github.com/systemd/systemd/issues/30448
       systemd = super.systemd.overrideAttrs (old: {
@@ -170,15 +173,35 @@
 
           system.stateVersion = "23.11";
 
-          environment.systemPackages = with pkgs; [
-            neofetch
-            lshw
-            pciutils
-            parted
-            git
-            nixos-install
-            lm_sensors
-          ];
+          environment = {
+              systemPackages = with pkgs; [
+              neofetch
+              lshw
+              pciutils
+              parted
+              git
+              nixos-install-tools
+              lm_sensors
+            ];
+
+            etc."nixos/source".source = ./.;
+          };
+        })
+        ({lib, ...}: {
+          nix.nixPath = [ "/etc/nix/inputs" ];
+
+          environment.etc = lib.mapAttrs' (name: value: {
+            name = "nix/inputs/${name}";
+            value.source = value.outPath;
+          }) inputs;
+
+          nix.registry = builtins.mapAttrs (name: value: {
+            flake = value;
+          }) inputs;
+
+          nix.extraOptions = ''
+              experimental-features = nix-command flakes
+            '';
         })
       ];
     };
@@ -244,6 +267,7 @@
         {};
 
       sd = nixosConfigurations.sd.config.system.build.sdImage;
+      sd-system = nixosConfigurations.sd.config.system.build.toplevel;
     };
 
     devShells.x86_64-linux.default = let
