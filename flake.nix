@@ -206,7 +206,7 @@
       ];
     };
 
-    packages.x86_64-linux = let
+    packages.riscv64-linux = let
       pkgs = nixpkgs.legacyPackages.riscv64-linux.extend self.overlays.default;
     in rec {
       uboot = (pkgs.buildUBoot {
@@ -269,6 +269,8 @@
       sd = nixosConfigurations.sd.config.system.build.sdImage;
       sd-system = nixosConfigurations.sd.config.system.build.toplevel;
     };
+    # For ease of building.
+    packages.x86_64-linux = packages.riscv64-linux;
 
     devShells.x86_64-linux.default = let
       pkgs = import nixpkgs { system = "x86_64-linux"; };
